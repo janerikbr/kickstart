@@ -1,5 +1,5 @@
-import renderToString from "preact-render-to-string";
 import { VNode } from "preact";
+import renderToString from "preact-render-to-string";
 
 /**
  * Server-Side Rendering Entry Point
@@ -16,7 +16,7 @@ import { VNode } from "preact";
  * This file is a critical part of the SSR architecture and should not be deleted.
  * It's built separately from the server code but is required at runtime.
  */
-export function render(element: VNode<any>) {
+export function render(element: VNode<unknown>) {
   const html = renderToString(element);
 
   if (!html) {

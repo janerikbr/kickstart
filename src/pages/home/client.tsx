@@ -1,4 +1,5 @@
 import { hydrate } from "preact";
+
 import { App } from "../../app";
 import { HomePage } from "./Home";
 

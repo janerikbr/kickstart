@@ -1,7 +1,9 @@
-import { Hono } from "hono";
-import { serveStatic } from "@hono/node-server/serve-static";
 import fs from "node:fs";
 import path from "node:path";
+
+import { serveStatic } from "@hono/node-server/serve-static";
+import { Hono } from "hono";
+
 import { App } from "../app";
 import { HomePage } from "../pages/home/Home";
 
@@ -124,7 +126,7 @@ async function loadRenderModule(isProduction: boolean) {
     const moduleUrl = `file://${entryPath}`;
     return import(/* @vite-ignore */ moduleUrl);
   } else {
-    return import("./entry-server.tsx");
+    return import("./entry-server.js");
   }
 }
 

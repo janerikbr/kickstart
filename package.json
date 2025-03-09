@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "kickstart": "node --experimental-strip-types kickstart.ts",
     "dev": "vite dev",
     "build:client": "vite build --outDir dist/client",
-    "build:server": "NODE_ENV=production vite build --ssr --config vite.server.config.ts",
+    "build:server": "vite build --ssr --config vite.server.config.ts",
     "build": "npm run build:client && npm run build:server",
+    "kickstart": "node --experimental-strip-types kickstart.ts",
+    "lint": "eslint src/ eslint.config.js --fix",
     "start": "cross-env NODE_ENV=production node dist/server/server.js"
   },
   "dependencies": {
@@ -18,15 +19,22 @@
     "preact-render-to-string": "6.5.13"
   },
   "devDependencies": {
+    "@eslint/js": "^9.22.0",
     "@hono/vite-dev-server": "0.19.0",
     "@preact/preset-vite": "2.10.1",
     "@types/node": "22.13.4",
     "@vanilla-extract/css": "1.17.1",
     "@vanilla-extract/vite-plugin": "5.0.1",
     "cross-env": "7.0.3",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "10.1.1",
+    "eslint-plugin-prettier": "5.2.3",
+    "eslint-plugin-simple-import-sort": "12.1.1",
     "execa": "9.5.2",
+    "globals": "^16.0.0",
     "prompts": "2.4.2",
     "typescript": "5.8.2",
+    "typescript-eslint": "^8.26.0",
     "vite": "6.2.1"
   },
   "pnpm": {
