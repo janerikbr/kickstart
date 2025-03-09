@@ -21,8 +21,8 @@ This is a boilerplate project designed for quickly starting new web applications
 1.  **Clone the repository:**
 
     ```bash
-    git clone <your-repository-url> my-new-project
-    cd my-new-project
+    git clone git@github.com:janerikbr/kickstart.git kickstart
+    cd kickstart
     ```
 
 2.  **Install dependencies:**
