@@ -1,4 +1,4 @@
-# Kickstart - Your Preact/Hono SSR Boilerplate
+# Kickstart - Hono/Preact SSR Boilerplate
 
 This is a boilerplate project designed for quickly starting new web applications using Preact, Hono, and Server-Side Rendering (SSR).
 
@@ -44,7 +44,7 @@ This is a boilerplate project designed for quickly starting new web applications
     pnpm dev
     ```
 
-    This will start the Vite development server.  Open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal).  The page should automatically reload as you make changes to the code.
+    This will start the Vite development server. The page should automatically reload as you make changes to the code.
 
 ## Development
 
@@ -93,11 +93,3 @@ This is a boilerplate project designed for quickly starting new web applications
 ## Deployment
 
 This project is designed to be deployed to environments that can run Node.js applications.
-
-## `kickstart.ts` Script Details
-
-The `kickstart.ts` script is a utility to help rename the project more easily. It does the following:
-
-*   Prompts you for a new project name.
-*   Updates the `name` field in `package.json`.
-*   Attempts to rename the root directory (if possible). *Note: Renaming the root directory may not always work depending on your system's permissions.*
