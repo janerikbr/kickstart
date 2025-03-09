@@ -1,0 +1,35 @@
+# General
+.DS_Store
+Thumbs.db
+node_modules
+pnpm-debug.log*
+.pnpm
+
+# Build Artifacts
+dist
+.vite
+
+# IDE and Editor
+.idea
+.vscode
+*.swp
+*.swo
+*.nvim
+*.bak
+*.tmp
+*~
+
+# Logs
+*.log
+
+# Environment Variables
+.env
+.env.*
+!/.env.example  # Keep your example env file
+
+# Dependency Managers
+**/package-lock.json  # If you accidentally used npm
+
+# System files
+[Oo]s.ini
+[Tt]est.ini

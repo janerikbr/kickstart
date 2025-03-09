@@ -1,0 +1,49 @@
+{
+  "name": "kickstart",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "kickstart": "node --experimental-strip-types kickstart.ts",
+    "dev": "vite dev",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "NODE_ENV=production vite build --ssr --config vite.server.config.ts",
+    "build": "npm run build:client && npm run build:server",
+    "start": "cross-env NODE_ENV=production node dist/server/server.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "1.13.8",
+    "hono": "4.7.4",
+    "preact": "10.26.2",
+    "preact-render-to-string": "6.5.13"
+  },
+  "devDependencies": {
+    "@hono/vite-dev-server": "0.19.0",
+    "@preact/preset-vite": "2.10.1",
+    "@types/node": "22.13.4",
+    "@vanilla-extract/css": "1.17.1",
+    "@vanilla-extract/vite-plugin": "5.0.1",
+    "cross-env": "7.0.3",
+    "execa": "9.5.2",
+    "prompts": "2.4.2",
+    "typescript": "5.8.2",
+    "vite": "6.2.1"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ],
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "engines": {
+    "node": ">=22.14.0",
+    "pnpm": ">=10.6.1"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
