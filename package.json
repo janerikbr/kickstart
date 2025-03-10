@@ -53,5 +53,6 @@
     "> 0.5%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "packageManager": "pnpm@10.6.1"
 }
