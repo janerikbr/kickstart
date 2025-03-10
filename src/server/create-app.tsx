@@ -48,7 +48,6 @@ export function createApp({ isProduction }: { isProduction: boolean }) {
       applicationMarkup: applicationMarkup,
       title: "Home Page",
       metaTags: '<meta name="description" content="Welcome to our home page">',
-      canonicalUrl: "https://example.com/",
       scriptTag,
       cssLinks,
     });
