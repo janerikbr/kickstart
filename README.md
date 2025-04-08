@@ -1,20 +1,9 @@
-# Kickstart - Hono/Preact SSR Boilerplate
-
-This is a boilerplate project designed for quickly starting new web applications using Preact, Hono, and Server-Side Rendering (SSR).
-
-## Features
-
-*   **Preact:** A fast, lightweight alternative to React, perfect for performance-sensitive applications.
-*   **Hono:** An ultra-fast web framework for Cloudflare Workers, Deno, Bun, Node.js, and more.  It simplifies routing and middleware.
-*   **Server-Side Rendering (SSR):** Improves initial page load performance and SEO by rendering pages on the server.
-*   **Vite:**  A fast and opinionated build tool that provides blazing fast HMR during development.
-*   **Vanilla Extract:**  Type-safe CSS-in-JS for predictable and maintainable styling.
-*   **CSS Reset:**  Includes a custom CSS reset (Josh Comeau's) to ensure consistent styling across browsers.
+# About Kickstart
+Kickstart is a boilerplate project designed for quickly starting new, SSR-powered web applications using Fastify, Preact,
+Vite and TailwindCSS. 
 
 ## Prerequisites
-
-*   **Node.js (>=22.14.0):**
-*   **pnpm (>=10.6.1):**
+[Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/).
 
 ## Getting Started
 
@@ -36,7 +25,7 @@ This is a boilerplate project designed for quickly starting new web applications
     ```bash
     pnpm kickstart
     ```
-    This will prompt you for a new project name.
+    This will prompt you for a project name and then create the project.
 
 4.  **Start the development server:**
 
@@ -44,30 +33,8 @@ This is a boilerplate project designed for quickly starting new web applications
     pnpm dev
     ```
 
-    This will start the Vite development server. The page should automatically reload as you make changes to the code.
-
-## Development
-
-*   **File Structure:**
-    *   `src/`: Contains the source code for your application.
-        *   `app.tsx`:  The main application component, wrapping all pages.
-        *   `app.css`: Global CSS styles and reset.
-        *   `pages/`:  Contains individual pages of your application.
-            *   `home/`:  Example home page components and styles.
-        *   `server/`:  Server-side rendering logic.
-            *   `create-app.tsx`: Hono application setup.
-            *   `entry-server.tsx`:  The entry point for server-side rendering.
-            *   `server.ts`:  The main server file, using Hono.
-    *   `public/`:  Static assets (images, fonts, etc.).
-    *   `vite.config.ts`:  Vite configuration file for client builds.
-    *   `vite.server.config.ts`: Vite configuration file for server builds.
-
-*   **Coding Conventions:**
-    *   Use TypeScript for all source code.
-    *   Follow Preact best practices for component development.
-    *   Use Vanilla Extract for type-safe CSS styling.
-
 ## Building for Production
+Work in progress.
 
 1.  **Build the client and server:**
 
@@ -90,6 +57,3 @@ This is a boilerplate project designed for quickly starting new web applications
 
     This will start the Node.js server. Make sure you have built the project first.
 
-## Deployment
-
-This project is designed to be deployed to environments that can run Node.js applications.
