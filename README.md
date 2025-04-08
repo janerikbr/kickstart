@@ -1,9 +1,12 @@
 # About Kickstart
-Kickstart is a boilerplate project designed for quickly starting new, SSR-powered web applications using Fastify, Preact,
-Vite and TailwindCSS. 
+Kickstart is a boilerplate project designed for quickly starting  SSR-powered web applications using
+- Node.js with Fastify
+- Preact
+- Vite
+- TailwindCSS 
 
 ## Prerequisites
-[Node.js](https://nodejs.org/en) and [pnpm](https://pnpm.io/).
+Node.js and pnpm.
 
 ## Getting Started
 
