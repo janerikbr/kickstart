@@ -1,10 +1,11 @@
-import { App } from "../app";
-import { HomePage } from "../pages/home/Home";
-
 import fs from "node:fs";
 import path from "node:path";
-import { fastify, FastifyInstance, FastifyServerOptions } from "fastify";
+
 import fastifyStatic from "@fastify/static";
+import { fastify, FastifyInstance, FastifyServerOptions } from "fastify";
+
+import { App } from "../app";
+import { HomePage } from "../pages/home/Home";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -190,8 +191,7 @@ function getScriptAndCssLinks(
     // through transformIndexHtml, so we just need our entry point
     scriptTag =
       '<script type="module" src="/src/pages/home/client.tsx"></script>';
-    // Don't manually include CSS in dev mode, Vite handles it
-    cssLinks = "";
+    cssLinks = '<link rel="stylesheet" href="/src/app.css"></script>';
   } else {
     // Production mode stays the same...
     const homeEntry = Object.values(manifest).find(
