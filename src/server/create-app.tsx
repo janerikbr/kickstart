@@ -4,8 +4,7 @@ import path from "node:path";
 import fastifyStatic from "@fastify/static";
 import { fastify, FastifyInstance, FastifyServerOptions } from "fastify";
 
-import { App } from "../app";
-import { HomePage } from "../pages/home/Home";
+import { renderPage } from "../pages/home/render-page.tsx";
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -36,15 +35,10 @@ export async function createApp(
     // Create the Vite server with explicit configuration
     const vite = await createServer({
       configFile: path.resolve("vite.development.config.ts"),
-      server: {
-        middlewareMode: true,
-      },
-      clearScreen: false, // Easier debugging
     });
 
     // Add Vite's middleware - this MUST be registered as a global middleware
     app.use(vite.middlewares);
-
     app.decorate("vite", vite);
   }
 
@@ -64,19 +58,15 @@ export async function createApp(
       const url = request.url;
 
       // In development, apply Vite HTML transforms
-      if (isDevelopment && fastify.vite) {
+      if (isDevelopment && app.vite) {
         // Process the template with Vite to inject HMR client
-        template = await fastify.vite.transformIndexHtml(url, template);
+        template = await app.vite.transformIndexHtml(url, template);
       }
 
       const renderModule = await loadRenderModule(isDevelopment);
 
       // Render the component
-      const applicationMarkup = renderModule.render(
-        <App>
-          <HomePage />
-        </App>,
-      );
+      const applicationMarkup = renderModule.render(renderPage());
 
       // Get script and CSS links
       const { scriptTag, cssLinks } = getScriptAndCssLinks(
@@ -97,9 +87,9 @@ export async function createApp(
       return reply.type("text/html").send(markup);
     } catch (error) {
       console.error("Server render error:", error);
-      if (isDevelopment && fastify.vite) {
+      if (isDevelopment && app.vite) {
         // For development, pass the error to Vite's error overlay
-        fastify.vite.ssrFixStacktrace(error as Error);
+        app.vite.ssrFixStacktrace(error as Error);
       }
       reply.status(500).send({ error: "Internal Server Error" });
     }
@@ -152,13 +142,8 @@ function renderHTMLTemplate(
 }
 
 function loadManifest(): Record<string, ManifestEntry> {
-  try {
-    const manifestPath = path.resolve("dist/client/.vite/manifest.json");
-    return JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
-  } catch (err) {
-    console.error("Failed to load manifest file:", err);
-    return {};
-  }
+  const manifestPath = path.resolve("dist/client/.vite/manifest.json");
+  return JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 }
 
 function loadTemplate(isDevelopment: boolean): string {
@@ -187,8 +172,6 @@ function getScriptAndCssLinks(
   let cssLinks = "";
 
   if (isDevelopment) {
-    // In development mode, we let Vite inject its client script
-    // through transformIndexHtml, so we just need our entry point
     scriptTag =
       '<script type="module" src="/src/pages/home/client.tsx"></script>';
     cssLinks = '<link rel="stylesheet" href="/src/app.css"></script>';

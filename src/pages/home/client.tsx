@@ -1,11 +1,5 @@
 import { hydrate } from "preact";
 
-import { App } from "../../app";
-import { HomePage } from "./Home";
+import { renderPage } from "./render-page.tsx";
 
-hydrate(
-  <App>
-    <HomePage />
-  </App>,
-  document.getElementById("app") as HTMLElement,
-);
+hydrate(renderPage(), document.getElementById("app") as HTMLElement);

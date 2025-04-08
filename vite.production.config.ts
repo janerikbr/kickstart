@@ -1,20 +1,13 @@
 import path from "node:path";
 
 import preact from "@preact/preset-vite";
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import { createRequire } from "module";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [
-    preact({
-      babel: {
-        cwd: createRequire(import.meta.url).resolve("@preact/preset-vite"),
-      },
-    }),
-    vanillaExtractPlugin(), // Add Vanilla Extract plugin
-  ],
+  plugins: [tailwindcss(), preact()],
   build: {
+    manifest: true,
     ssr: true,
     target: "node22",
     outDir: "dist/server",

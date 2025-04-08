@@ -4,9 +4,10 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   appType: "custom",
+  plugins: [tailwindcss(), preact()],
   server: {
     middlewareMode: true,
     hmr: true,
   },
-  plugins: [tailwindcss(), preact()],
+  clearScreen: false,
 });
