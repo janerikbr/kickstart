@@ -1,5 +1,3 @@
-import "./app.css";
-
 import { ComponentChildren } from "preact";
 
 interface AppProps {

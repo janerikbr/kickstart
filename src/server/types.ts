@@ -1,4 +1,7 @@
-export interface RenderResult {
-  head?: string;
-  html?: string;
+import type { ViteDevServer } from "vite";
+
+declare module "fastify" {
+  interface FastifyInstance {
+    vite?: ViteDevServer;
+  }
 }
