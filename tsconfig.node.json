@@ -5,5 +5,5 @@
     "lib": ["ES2023"],
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo"
   },
-  "include": ["src/server/**/*.ts", "vite.server.config.ts"]
+  "include": ["src/server/**/*.{ts,tsx}", "vite.production.config.ts"]
 }

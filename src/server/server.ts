@@ -1,49 +1,67 @@
-import { serve } from "@hono/node-server";
-
 import { createApp } from "./create-app.js";
 
-const isProduction = process.env.NODE_ENV === "production";
-const port = Number(process.env.PORT) || 5173;
+const isDevelopment = process.env.NODE_ENV === "development";
+const port = Number(process.env.PORT) || 3001;
 
 console.log(
-  `Starting server in ${isProduction ? "production" : "development"} mode`,
+  `Starting server in ${isDevelopment ? "development" : "production"} mode`,
 );
 
-const app = createApp({
-  isProduction,
+const app = await createApp({
+  disableRequestLogging: true,
+  // ignoreTrailingSlash: true,
+  logger: isDevelopment
+    ? {
+        transport: {
+          target: "pino-pretty",
+          options: {
+            translateTime: "HH:MM:ss Z",
+            ignore: "pid,hostname",
+            colorize: true,
+            messageFormat: "{msg}",
+            singleLine: false,
+          },
+        },
+        serializers: {
+          err: (err) => {
+            return {
+              type: err.constructor.name,
+              stack: err.stack ?? "",
+              ...err,
+            };
+          },
+        },
+      }
+    : { level: "error" },
 });
 
-app.onError((error, context) => {
+// Error handling
+app.setErrorHandler((error, _request, reply) => {
   // In development, let Vite handle the error display
   if (process.env.NODE_ENV === "development") {
     throw error;
   }
 
   console.error(error);
-  return context.html(
-    "<h1>Server Error</h1><p>An unknown error occured.</p>",
-    500,
-  );
+
+  reply
+    .code(500)
+    .type("text/html")
+    .send("<h1>Server Error</h1><p>An unknown error occured.</p>");
 });
 
-app.notFound((context) => {
-  return context.html(
-    "<h1>Not Found</h1><p>The requested resource was not found.</p>",
-    404,
-  );
+// Not found handler
+app.setNotFoundHandler((_request, reply) => {
+  reply
+    .code(404)
+    .type("text/html")
+    .send("<h1>Not Found</h1><p>The requested resource was not found.</p>");
 });
 
-// Start the node server if this file is the entry point
-if (import.meta.url === new URL(process.argv[1], "file://").href) {
-  serve(
-    {
-      fetch: app.fetch,
-      port,
-    },
-    (info) => {
-      console.log(`Listening at http://localhost:${info.port}`);
-    },
-  );
-}
-
-export default app;
+app.listen({ port, host: "0.0.0.0" }, (err, address) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.log(`Listening at ${address}`);
+});

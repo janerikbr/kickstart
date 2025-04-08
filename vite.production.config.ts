@@ -1,24 +1,10 @@
-import { defineConfig } from "vite";
-import preact from "@preact/preset-vite";
-import { createRequire } from "module";
 import path from "node:path";
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
-/**
- * Server-side Vite configuration file
- *
- * This configuration is ONLY used for building server-side code for production:
- * - When running: pnpm build:server (vite build --ssr --config vite.server.config.ts)
- * - NOT used during development
- *
- * Key features:
- * - Enables SSR-specific build options
- * - Targets Node.js runtime
- * - Configures server entry points
- * - Preserves predictable output filenames for server modules
- * - Ensures proper Node.js module resolution
- * - Processes Vanilla Extract styles for consistent class names with client
- */
+import preact from "@preact/preset-vite";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import { createRequire } from "module";
+import { defineConfig } from "vite";
+
 export default defineConfig({
   plugins: [
     preact({
